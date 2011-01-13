@@ -7,7 +7,11 @@ Use ICE to to query murmur.
 
 Origional Author: Thomas Leveil
 Contributors: none
-Version: 1.0
+Version: 1.1
+
+CHANGELOG
+1.1 - 2011/01/13 - fix to make it work with murmur v1.2.2
+
 
 You can specify a different ip:port in the munin-node config file as follow:
 
@@ -100,7 +104,9 @@ function do_count()
 			$maxusers = $s->getConf('users');
 			if (!$maxusers) $maxusers = $AdefaultConf['users'];
 			$totalMaxUsers += intval($maxusers);
-
+            
+            $tree = $s->getTree();
+            //print_r($tree);
 			$connectedUsers = countConnectedUsers($s->getTree());			
 			$totalConnectedUsers += $connectedUsers;
 		}
@@ -119,7 +125,7 @@ function do_count()
 
 function countConnectedUsers($channelTree) 
 {
-	$count = intval($channelTree->players);
+	$count = intval(count($channelTree->users));
 	
 	if (isset($channelTree->children))
 	{
