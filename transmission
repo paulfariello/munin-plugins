@@ -197,8 +197,8 @@ if __name__ == '__main__':
             config()
         elif sys.argv[1]=="autoconf" :
             autoconf()
-        else:
+        elif sys.argv[1]!="":
             raise ValueError, "unknown parameter '%s'" % sys.argv[1]
-    else:
-        fetch()
-    sys.exit(0)
+
+fetch()
+sys.exit(0)
